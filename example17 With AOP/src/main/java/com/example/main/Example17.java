@@ -4,9 +4,10 @@ import com.example.beans.Person;
 import com.example.beans.Vechile;
 import com.example.config.projectConfig;
 import com.example.model.Song;
+import com.example.services.VehicleServices;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-public class Example13 {
+public class Example17 {
 
     public static void main(String[] args) {
 
@@ -18,32 +19,37 @@ public class Example13 {
         // below line create spring IOC container or spring context
         // when using @annotation use AnnotationConfigApp:context
 
+        // Example 17 Without AOP code started here
         var context =  new AnnotationConfigApplicationContext(projectConfig.class);
+        VehicleServices vehicleServices = context.getBean(VehicleServices.class);   // getting bean from spring context
+        System.out.println(vehicleServices.getClass());     // by knowing the return type of bean
+
 
         // Problem Statement Code Started Here
-        String[] persons = context.getBeanNamesForType(Person.class);
+       /* String[] persons = context.getBeanNamesForType(Person.class);
         Person  person = context.getBean(Person.class);
 
         String[] vehicles = context.getBeanNamesForType(Vechile.class);
-        Vechile vechile = context.getBean(Vechile.class);
+        Vechile vechile = context.getBean(Vechile.class);*/
 
         // initalize the vehicleStarted variable for passing the arugment
-        boolean vehicleStared = false;
+        boolean vehicleStared = true;
 
         // also initalize the Song class object and setting the values
         Song song  = new Song();
         song.setTitle("go man down , for not me");
         song.setSingerName("Fouziya");
 
-        vechile.getVehicleServices().playMusic(vehicleStared,song);
-        vechile.getVehicleServices().moveVehicle(vehicleStared);
+        System.out.println(vehicleServices.playMusic(vehicleStared,song) );
+        System.out.println(vehicleServices.moveVehicle(vehicleStared));
+        System.out.println(vehicleServices.applyBrake(vehicleStared));
 
         ////////////////////////////////
         System.out.println("\n---------------Bean Autowiring Example Start here------------------\n");
 
-        System.out.println("Person name from Spring Context is : "+person.getName());
+      /*  System.out.println("Person name from Spring Context is : "+person.getName());
         System.out.println("Vechile Name from Spring Context is : "+vechile.getName());
-        System.out.println("Vehicle that Person own is :"+person.getVechile()+"\n-----------------------");
+        System.out.println("Vehicle that Person own is :"+person.getVechile()+"\n-----------------------");*/
 
         // when we use XML Configuration use ClassPathXMLApplicationContext
         //   var context = new ClassPathXmlApplicationContext("bean.xml");

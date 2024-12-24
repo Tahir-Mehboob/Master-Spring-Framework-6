@@ -1,5 +1,6 @@
 package com.example.services;
 
+import com.example.interfaces.LogAspect;
 import com.example.interfaces.Speakers;
 import com.example.interfaces.Tyres;
 import com.example.model.Song;
@@ -37,74 +38,79 @@ public class VehicleServices {
      * @param song
      * @author Tahir Mehboob
      */
-
+    @LogAspect
     public String playMusic(boolean vehicleStared , Song song){
 
         // without Aop code started
-        Instant start = Instant.now();
-        logger.info("Methods execution start ");
+       /* Instant start = Instant.now();
+        logger.info("Methods execution start ");*/
 
         // apply validation
-        String music = null;
+      /*  String music = null;
         if(vehicleStared){
             music = speakers.makerSound(song);
         }else {
             logger.log(Level.SEVERE,"Vehicle not started to perform the operation");
-        }
-        Instant finish = Instant.now();
+        }*/
+
+        /*Instant finish = Instant.now();
         long timeElapsed = Duration.between(start, finish).toMillis();
-        logger.info("Time took to Methods execution"+timeElapsed);
+        logger.info("Time took to Methods execution"+timeElapsed);*/
 
         // ended without aop code
 
        // String music = speakers.makerSound(song);
         //System.out.println(music);
-        return music;
+
+        // Adding this b/c of @AroundThrown Advice
+    //    throw new RuntimeException("Damm ! Null Pointer Exception ");
+
+        return  speakers.makerSound(song);
     }
 
     // below mehtod depend on Tyre dependency and which get primary bean
     public String moveVehicle(boolean VehicleStared){
         //jdk 8 introduce Instant for time taking method
-        Instant start = Instant.now();
+      /*  Instant start = Instant.now();
         logger.info("Methods execution start ");
-
+*/
         // initalize the the variable
-        String move = null;
+     /*   String move = null;
         if(VehicleStared){
             move = tyres.rotate();
         }
         else{
             logger.log(Level.SEVERE,"Vehicle not started to perform the operation");
-        }
-        logger.info("Methods execution finish");
+        }*/
+        /*logger.info("Methods execution finish");
         Instant finish = Instant.now();
         long timeElapsed = Duration.between(start, finish).toMillis();
-        logger.info("Time took to Methods execution"+timeElapsed);
+        logger.info("Time took to Methods execution"+timeElapsed);*/
 
         //String move = tyres.rotate();
        // System.out.println(move);
-        return move;
+        return tyres.rotate();
     }
 
     // adding one more method for this AOP example
 
     public String applyBrake(boolean vehicleStared){
-        Instant  start = Instant.now();
-        logger.info("Methods execution start ");
+        /*Instant  start = Instant.now();
+        logger.info("Methods execution start ");*/
 
-        String status = null;
+     /*   String status = null;
         if(vehicleStared){
             status = tyres.stop();
         }
         else{
             logger.log(Level.SEVERE,"Vehicle not started to perform the operation");
-        }
-        logger.info("Methods execution finish");
+        }*/
+      /*  logger.info("Methods execution finish");
         Instant finish = Instant.now();
         long timeElapsed = Duration.between(start, finish).toMillis();
-        logger.info("Time took to Methods execution"+timeElapsed);
+        logger.info("Time took to Methods execution"+timeElapsed);*/
 
-        return status;
+        return tyres.stop();
     }
 
     // adding this b/c both beans having same type so which one inject
