@@ -1,8 +1,6 @@
-package com.eazybytes.example18_SpringBoot.controller;
+package com.eazybytes.example21_SpringBoot.controller;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller

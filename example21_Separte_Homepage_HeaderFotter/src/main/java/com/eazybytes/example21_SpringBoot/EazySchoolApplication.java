@@ -1,8 +1,7 @@
-package com.eazybytes.example18_SpringBoot;
+package com.eazybytes.example21_SpringBoot;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 
 // create exclusion list when we didn't create bean and configure by spring boot using autoconfigure
 //@SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})
