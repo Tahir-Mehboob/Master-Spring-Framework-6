@@ -2,6 +2,7 @@ package com.eazybytes.example21_SpringBoot.controller;
 
 import com.eazybytes.example21_SpringBoot.model.Contact;
 import com.eazybytes.example21_SpringBoot.service.ContactService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,10 +14,11 @@ import java.util.logging.Logger;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 @Controller
+@Slf4j
 public class ContactController {
 
     // Enabling Logging in this class
-    final static Logger log = Logger.getLogger(String.valueOf(ContactController.class));
+   // final static Logger log = Logger.getLogger(String.valueOf(ContactController.class));
 
     private final ContactService contactService;
 
@@ -57,6 +59,7 @@ public class ContactController {
 @RequestMapping(value="/saveMsg",method = POST)
 public ModelAndView saveContact(Contact contact){
     // once controller class is ready Inject into controller layer
+    log.info("name "+contact.getName());
     contactService.saveContactDetails(contact);
     // return new contact page
     return new ModelAndView("redirect:/contact");
