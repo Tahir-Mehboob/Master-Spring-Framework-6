@@ -2,9 +2,13 @@ package com.eazybytes.example21_SpringBoot.controller;
 
 import com.eazybytes.example21_SpringBoot.model.Contact;
 import com.eazybytes.example21_SpringBoot.service.ContactService;
+import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -29,7 +33,8 @@ public class ContactController {
     }
 
     @RequestMapping(value="/contact")
-    public String displayContactForm(){
+    public String displayContactForm(Model theModel){
+        theModel.addAttribute("contact", new Contact());
         return "contact.html";
         }
 
@@ -57,11 +62,15 @@ public class ContactController {
     // using Pojo object to save data into db with the help of service layer
 
 @RequestMapping(value="/saveMsg",method = POST)
-public ModelAndView saveContact(Contact contact){
+public String saveContact(@Valid @ModelAttribute("contact") Contact contact , Errors errors){
+    if(errors.hasErrors()){
+        log.info("Contact form validation error"+errors.toString());
+        return "contact.html";
+    }
     // once controller class is ready Inject into controller layer
     log.info("name "+contact.getName());
     contactService.saveContactDetails(contact);
     // return new contact page
-    return new ModelAndView("redirect:/contact");
+    return "redirect:/contact";
 }
 }
