@@ -3,30 +3,11 @@ package com.eazybytes.example21_SpringBoot.service;
 import com.eazybytes.example21_SpringBoot.model.Contact;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import org.springframework.web.context.annotation.RequestScope;
 
 import java.util.logging.Logger;
 @Slf4j
 @Service
-@RequestScope
 public class ContactService {
-
-    private int counter = 0;
-
-    public ContactService(){
-        System.out.println("ContactService Bean Created ..... ");
-    }
-
-    // getter and setter for incrementing and checking the Bean Scope using @RequestScope
-
-    public int getCounter() {
-        return counter;
-    }
-
-    public void setCounter(int counter) {
-        this.counter = counter;
-    }
-
 
   //  final static Logger log = Logger.getLogger(String.valueOf(ContactService.class));
     /**

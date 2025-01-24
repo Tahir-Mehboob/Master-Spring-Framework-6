@@ -67,13 +67,9 @@ public String saveContact(@Valid @ModelAttribute("contact") Contact contact , Er
         log.info("Contact form validation error"+errors.toString());
         return "contact.html";
     }
-
-    contactService.saveContactDetails(contact);
-    contactService.setCounter(contactService.getCounter()+1);
-
     // once controller class is ready Inject into controller layer
-    log.info("Number of Times the contact form is submitted : "+contactService.getCounter() );
-
+    log.info("name "+contact.getName());
+    contactService.saveContactDetails(contact);
     // return new contact page
     return "redirect:/contact";
 }
